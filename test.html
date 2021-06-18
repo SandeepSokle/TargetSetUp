@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="checkbox" checked/>
+
+    <script>
+      let input = document.querySelector("input");
+      input.addEventListener("click", function (e) {
+        if(e.currentTarget.getAttribute("checked")==""){
+          e.currentTarget.removeAttribute("checked");
+          e.currentTarget.setAttribute("unchecked","")
+          e.currentTarget.value="off";
+        }
+        else {
+          e.currentTarget.removeAttribute("unchecked");
+          e.currentTarget.setAttribute("checked","")
+          e.currentTarget.value = "on"
+        }
+        console.log(e.currentTarget.value);
+      });
+
+      let check = document.createElement("input");
+      check.setAttribute
+    </script>
+  </body>
+</html>

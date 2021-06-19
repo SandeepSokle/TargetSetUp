@@ -46,8 +46,11 @@ editBtn.addEventListener("click", function (e) {
 createBtn.addEventListener("click", function (e) {
   if (isclicked) return;
   isclicked = true;
-  let createTarget = createTargetPopup(`Enter Your Target Title Here<br>
-  And Press Enter`,"blue");
+  let createTarget = createTargetPopup(
+    `Enter Your Target Title Here<br>
+  And Press Enter`,
+    "blue"
+  );
 
   isClickInInput = false;
   createTitle.addEventListener("click", function (e) {
@@ -73,7 +76,7 @@ createBtn.addEventListener("click", function (e) {
   /////////////////////////////////Enter Event for save target
   ////////////main functioning start here
   let id = uid();
-  addTargetInGrid(id,"unchecked");
+  addTargetInGrid(id, "unchecked");
 });
 
 function daysDifference(date11, date12) {
@@ -327,7 +330,7 @@ function todayDatePlusDay(add) {
   return `${year}-${month}-${day}`;
 }
 
-function createTargetPopup(content,color) {
+function createTargetPopup(content, color) {
   let createTarget = document.createElement("div");
   createTarget.classList.add("createTarget");
   createTarget.innerHTML = `<div class="createTitle" contenteditable>${content}
@@ -340,8 +343,8 @@ function createTargetPopup(content,color) {
   </div>
   <div class="createRate">
   <p class = "createTargetRate">Rate your Target:</p>
-  <div class="create blue ${color=="blue"? "select":""}"></div>
-  <div class="create red ${color=="red"? "select":""}"></div>
+  <div class="create blue ${color == "blue" ? "select" : ""}"></div>
+  <div class="create red ${color == "red" ? "select" : ""}"></div>
   </div>`;
 
   /////// remove data from input with First click
@@ -366,7 +369,7 @@ function chooseTargetRate(createTarget) {
   }
 }
 
-function addTargetInGrid(id,ischeck) {
+function addTargetInGrid(id, ischeck) {
   createTitle.addEventListener("keypress", function (e) {
     if (e.key == "Enter") {
       let color = document.querySelector(".create.select").classList[1];
@@ -400,16 +403,21 @@ function addTargetInGrid(id,ischeck) {
           document.querySelector(".deleteBtn").classList.contains("btnSelect")
         )
           deleteTarget(e.currentTarget, id);
-        if (document.querySelector(".editBtn").classList.contains("btnSelect"))
+        if (
+          document.querySelector(".editBtn").classList.contains("btnSelect")
+        ) {
+          let str = target.querySelector(".contant.time.starting").innerText;
+          let end = target.querySelector(".contant.time.ending").innerText;
           editTarget(
             e.currentTarget,
             color,
             id,
             ischeck,
             title,
-            strDate.value,
-            endDate.value
+            str,
+            end
           );
+        }
       });
 
       // console.log(daysDifference(strDate.value, endDate.value));
@@ -445,37 +453,35 @@ function editBtnUpdates(currentTarget, btn) {
 function editTarget(currentTarget, clr, id, ischeck, title, str, end) {
   if (isclicked) return;
   isclicked = true;
-  let createTarget = createTargetPopup(title,clr);
-  
+  let createTarget = createTargetPopup(title, clr);
+
   isClickInInput = false;
   createTitle.addEventListener("click", function (e) {
     if (isClickInInput) return;
     e.currentTarget.innerText = title;
     isClickInInput = isclicked = true;
-    
+
     ///////// Set Default Starting And Ending Date
-    
+
     // let strdate = todayDatePlusDay(0);
-    
+
     // console.log(strDate + "\n" + endDate);
     strDate.defaultValue = str;
     ///set ending date 2 next 2nd day
     // let enddate = todayDatePlusDay(3);
     // console.log(date);
     endDate.defaultValue = end;
-    
+
     /////////////////////////////
   });
   chooseTargetRate(createTarget);
-  
+
   body.append(createTarget);
-  
+
   /////////////////////////////////Enter Event for save target
   ////////////main functioning start here
   // let id = uid();
   deleteTarget(currentTarget, id);
   // console.log(ischeck);
-  addTargetInGrid(id,ischeck);
-
-  
+  addTargetInGrid(id, ischeck);
 }

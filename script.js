@@ -406,8 +406,8 @@ function addTargetInGrid(id, ischeck) {
         if (
           document.querySelector(".editBtn").classList.contains("btnSelect")
         ) {
-          let str = target.querySelector(".contant.time.starting").innerText;
-          let end = target.querySelector(".contant.time.ending").innerText;
+          let str = target.querySelector(".starting").innerText;
+          let end = target.querySelector(".ending").innerText;
           editTarget(
             e.currentTarget,
             color,

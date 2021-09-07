@@ -1,9 +1,11 @@
+
+
 let createBtn = document.querySelector(".createBtn");
 let body = document.querySelector("body");
 let grid = document.querySelector(".grid");
 let isClickInInput;
 let isclicked = false;
-const uid = new ShortUniqueId();
+var today = new Date();
 let isDelete = false;
 let delBtn = document.querySelector(".deleteBtn");
 let unComBtn = document.querySelector(".uncomplete");
@@ -75,7 +77,18 @@ createBtn.addEventListener("click", function (e) {
 
   /////////////////////////////////Enter Event for save target
   ////////////main functioning start here
-  let id = uid();
+  let id =
+    today.getFullYear() +
+    "" +
+    (today.getMonth() + 1) +
+    "" +
+    today.getDate() +
+    "" +
+    today.getHours() +
+    "" +
+    today.getMinutes() +
+    "" +
+    today.getSeconds();
   addTargetInGrid(id, "unchecked");
 });
 
@@ -105,8 +118,8 @@ function saveTargetInLocalStorage(color, id, ischeck, title, strDate, endDate) {
 }
 
 function addTargetAfterRefresh() {
-  let taskArr = [];
-  taskArr = JSON.parse(localStorage.getItem("tasks"));
+  let taskArr = JSON.parse(localStorage.getItem("tasks"));
+  if(taskArr == undefined) taskArr = [];
   // console.log(taskArr);
   for (let i = 0; i < taskArr.length; i++) {
     let clr = taskArr[i].color;
@@ -158,10 +171,9 @@ addTargetAfterRefresh();
 
 function addTargetInSortedList() {
   navRight.innerHTML = "";
-  let taskArr = [];
-  taskArr = JSON.parse(localStorage.getItem("tasks"));
+   let taskArr = JSON.parse(localStorage.getItem("tasks"));
   // console.log(taskArr);
-
+if (taskArr == undefined) taskArr = [];
   taskArr = taskArr.sort((a, b) => {
     return a.endDate > b.endDate ? 1 : -1;
   });

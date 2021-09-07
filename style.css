@@ -207,9 +207,17 @@ button {
 }
 
 .checkBox {
-  margin-left: 10vw;
+ 
   border-radius: 50%;
 }
+
+.idContainer{
+
+  display: flex;
+      align-items: center;
+      justify-content: space-between;
+}
+
 
 .title {
   /* border: 1px solid blue; */

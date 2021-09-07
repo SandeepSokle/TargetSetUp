@@ -5,7 +5,7 @@ let body = document.querySelector("body");
 let grid = document.querySelector(".grid");
 let isClickInInput;
 let isclicked = false;
-var today = new Date();
+
 let isDelete = false;
 let delBtn = document.querySelector(".deleteBtn");
 let unComBtn = document.querySelector(".uncomplete");
@@ -77,6 +77,7 @@ createBtn.addEventListener("click", function (e) {
 
   /////////////////////////////////Enter Event for save target
   ////////////main functioning start here
+  var today = new Date();
   let id =
     today.getFullYear() +
     "" +

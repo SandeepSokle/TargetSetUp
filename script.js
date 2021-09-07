@@ -1,11 +1,8 @@
-
-
 let createBtn = document.querySelector(".createBtn");
 let body = document.querySelector("body");
 let grid = document.querySelector(".grid");
 let isClickInInput;
 let isclicked = false;
-
 let isDelete = false;
 let delBtn = document.querySelector(".deleteBtn");
 let unComBtn = document.querySelector(".uncomplete");
@@ -78,18 +75,26 @@ createBtn.addEventListener("click", function (e) {
   /////////////////////////////////Enter Event for save target
   ////////////main functioning start here
   var today = new Date();
+
+  let yr = today.getFullYear();
+  let month = today.getMonth() + 1;
+  let day = today.getDate();
+  let hr = today.getHours();
+  let min = today.getMinutes();
+  let se = today.getSeconds();
+
   let id =
-    today.getFullYear() +
+    yr +
     "" +
-    (today.getMonth() + 1) +
+    (day < 10 ? `0${day}` : `${day}`) +
+    (month < 10 ? `0${month}` : `${month}`) +
     "" +
-    today.getDate() +
     "" +
-    today.getHours() +
+    (hr < 10 ? `0${hr}` : hr) +
     "" +
-    today.getMinutes() +
+    (min < 10 ? `0${min}` : min) +
     "" +
-    today.getSeconds();
+    (se < 10 ? `0${se}` : se);
   addTargetInGrid(id, "unchecked");
 });
 
@@ -120,7 +125,7 @@ function saveTargetInLocalStorage(color, id, ischeck, title, strDate, endDate) {
 
 function addTargetAfterRefresh() {
   let taskArr = JSON.parse(localStorage.getItem("tasks"));
-  if(taskArr == undefined) taskArr = [];
+  if (taskArr == undefined) taskArr = [];
   // console.log(taskArr);
   for (let i = 0; i < taskArr.length; i++) {
     let clr = taskArr[i].color;
@@ -172,9 +177,9 @@ addTargetAfterRefresh();
 
 function addTargetInSortedList() {
   navRight.innerHTML = "";
-   let taskArr = JSON.parse(localStorage.getItem("tasks"));
+  let taskArr = JSON.parse(localStorage.getItem("tasks"));
   // console.log(taskArr);
-if (taskArr == undefined) taskArr = [];
+  if (taskArr == undefined) taskArr = [];
   taskArr = taskArr.sort((a, b) => {
     return a.endDate > b.endDate ? 1 : -1;
   });
@@ -421,15 +426,7 @@ function addTargetInGrid(id, ischeck) {
         ) {
           let str = target.querySelector(".starting").innerText;
           let end = target.querySelector(".ending").innerText;
-          editTarget(
-            e.currentTarget,
-            color,
-            id,
-            ischeck,
-            title,
-            str,
-            end
-          );
+          editTarget(e.currentTarget, color, id, ischeck, title, str, end);
         }
       });
 
